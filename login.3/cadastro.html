@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper login-form active">
+            <form id="loginForm">
+                <h2>Login</h2>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email" id="loginEmail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha" id="loginPassword" required>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox" id="rememberMe"> Lembrar senha</label>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+                <button type="submit">Entrar</button>
+                <div class="signup-link">
+                    Não tem uma conta? <a href="#" id="showSignup">Cadastre-se</a>
+                </div>
+                <div id="login-mensagem" class="mensagem"></div>
+            </form>
+        </div>
+
+        <div class="form-wrapper signup-form">
+            <form id="cadastroForm">
+                <h2>Cadastro</h2>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nome Completo" id="signupNome" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email" id="signupEmail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha" id="signupPassword" required>
+                </div>
+                <button type="submit">Cadastrar</button>
+                <div class="login-link">
+                    Já tem uma conta? <a href="#" id="showLogin">Faça login</a>
+                </div>
+                <div id="cadastro-mensagem" class="mensagem"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
