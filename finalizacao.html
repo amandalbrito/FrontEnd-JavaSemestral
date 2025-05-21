@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finalização da Compra</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
+</head>
+<body>
+  <h1>Finalização da Compra</h1>
+
+  <div id="resumoCompra">
+    <h2>Resumo dos Itens</h2>
+    <ul id="listaItens"></ul>
+    <p><strong>Total:</strong> R$ <span id="totalCompra">0.00</span></p>
+  </div>
+
+  <div id="pagamento">
+    <h2>Pagamento com Cartão</h2>
+    <!-- Elemento do Stripe para coletar dados do cartão -->
+    <div id="card-element"></div>
+    <div id="card-errors" role="alert" style="color:red; margin-top: 10px;"></div>
+
+    <button id="btnFinalizar">Finalizar Compra</button>
+
+    <div id="mensagem" style="color:red; margin-top: 10px;"></div>
+  </div>
+
+  <script src="js/payment.js"></script>
+</body>
+</html>
