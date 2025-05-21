@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Carrinho de compras</h1>
+    </header>
+
+    <p class="boas-vindas">Bem vindo(a) ao seu carrinho da FILA FREE! Faça sua compra.</p>
+
+    <button class="continuar-btn" id="btnContinuar">🛒 Continuar comprando</button>
+
+    <div id="listaCarrinho"></div>
+
+    <div class="valorTotal">
+      <div class="total">
+        <strong>TOTAL</strong>
+        <span id="totalValor">R$ 0,00</span>
+      </div>
+    </div>
+
+    <div class="btnPagar">
+      <button id="abrirPagamento" class="pagar-button">Pagar</button>
+    </div>
+  </div>
+
+  <!-- Tela de pagamento sobreposta -->
+  <div id="tela-pagamento" class="overlay hidden">
+    <div class="payment-modal">
+      <div class="pagamento-header">
+        <button id="fecharPagamento" class="drag-icon">&#10005;</button>
+      </div>
+
+      <button class="edit-button">Selecione a forma de pagamento</button>
+
+      <div class="payment-options">
+        <button class="payment-option" data-type="debito">Débito</button>
+        <button class="payment-option" data-type="credito">Crédito</button>
+      </div>
+
+      <button id="finalizarBtn">FINALIZAR COMPRA</button>
+    </div>
+  </div>
+
+  <script src="carrinho.js"></script>
+</body>
+</html>

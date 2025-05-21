@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const status = document.getElementById('status');
 
   btnVoltar.addEventListener('click', () => {
-    alert('Voltando para lista de compras...');
+    alert('Voltando para tela inicial...');
     window.location.href = 'lista-compras.html';
   });
 

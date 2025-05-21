@@ -1,86 +1,63 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  carregarResumo();
+const stripe = Stripe('pk_test_51RO0riDAnzzTLg7ZQ7paDAPDlYeTYzVkBYbe5bglrfEUymf6PQtBA9OvulvgjEJgJJCtsx8OABByA2pgMN4lstFx00RIrW2giR');
 
-  const stripe = Stripe('SEU_PUBLISHABLE_KEY_STRIPE'); // Coloque sua public key aqui
-  const elements = stripe.elements();
-  const cardElement = elements.create('card');
-  cardElement.mount('#card-element');
+const userId = 1; // ID do usuário (fixo ou dinâmico, conforme seu app)
 
-  document.getElementById('btnFinalizar').addEventListener('click', async () => {
-    await finalizarCompra(stripe, cardElement);
-  });
-});
+let clientSecret = null;
+let paymentIntentId = null;
+let formattedAmount = null;
 
-function carregarResumo() {
-  const listaItens = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-  const ul = document.getElementById('listaItens');
-  ul.innerHTML = '';
-
-  let total = 0;
-
-  listaItens.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)} x ${item.quantidade}`;
-    ul.appendChild(li);
-    total += item.preco * item.quantidade;
+// Ao carregar a página
+window.onload = async () => {
+  const res = await fetch(`http://localhost:8080/api/stripe/create-payment-intent?userId=${userId}`, {
+    method: 'POST'
   });
 
-  document.getElementById('totalCompra').textContent = total.toFixed(2);
-}
+  const data = await res.json();
 
-async function finalizarCompra(stripe, cardElement) {
-  const mensagem = document.getElementById('mensagem');
-  mensagem.textContent = '';
+  if (data.clientSecret) {
+    clientSecret = data.clientSecret;
 
-  const itens = JSON.parse(localStorage.getItem('carrinho')) || [];
-  if (itens.length === 0) {
-    mensagem.textContent = 'Carrinho está vazio.';
-    return;
-  }
-
-  const token = localStorage.getItem('token');
-  if (!token) {
-    mensagem.textContent = 'Usuário não autenticado. Faça login novamente.';
-    return;
-  }
-
-  try {
-    const response = await fetch('http://localhost:8080/api/users/"/create-payment-intent', {
+    // Recupera valor formatado (requisita novamente ou usa o último pagamento salvo)
+    const valor = await fetch(`http://localhost:8080/api/stripe/create-payment-dto`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ itens })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: 1000, // Você pode ajustar esse valor se quiser simular
+        currency: 'brl',
+        description: 'Pagamento de produtos do carrinho'
+      })
     });
 
-    if (!response.ok) {
-      const data = await response.json();
-      throw new Error(data.message || 'Erro ao criar pagamento');
-    }
-
-    const { clientSecret } = await response.json();
-
-    // 2. Confirma o pagamento com Stripe.js
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-      }
-    });
-
-    if (result.error) {
-      // Exibe o erro para o cliente
-      mensagem.textContent = result.error.message;
-    } else {
-      if (result.paymentIntent.status === 'succeeded') {
-        alert('Compra finalizada com sucesso!');
-        localStorage.removeItem('carrinho');
-        window.location.href = 'lista-compras.html';
-      }
-    }
-
-  } catch (err) {
-    mensagem.textContent = err.message;
+    const valorData = await valor.json();
+    formattedAmount = valorData.amountFormatted;
+    document.getElementById('amount-display').innerText = `Total a pagar: ${formattedAmount}`;
   }
-}
+};
+
+// Elemento do cartão
+const elements = stripe.elements();
+const card = elements.create("card");
+card.mount("#card-element");
+
+const form = document.getElementById("payment-form");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: card
+    }
+  });
+
+  if (error) {
+    document.getElementById("status-message").textContent = "Erro no pagamento: " + error.message;
+  } else if (paymentIntent.status === "succeeded") {
+    // Confirma e dispara o e-mail
+    const confirm = await fetch(`http://localhost:8080/api/stripe/confirmar-pagamento?paymentIntentId=${paymentIntent.id}&destinatario=email&pessoa=${userId}`, {
+      method: "POST"
+    });
+
+    const msg = await confirm.text();
+    document.getElementById("status-message").textContent = "✔️ Pagamento confirmado! " + msg;
+  }
+});

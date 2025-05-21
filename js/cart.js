@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnLogout = document.getElementById('btnLogout');
   const btnIrParaLeitura = document.getElementById('btnIrParaLeitura');
   const btnIrParaManual = document.getElementById('btnIrParaManual');
+  const btnVerCarrinho = document.getElementById('btnVerCarrinho');
+
+  btnVerCarrinho.addEventListener('click', () => {
+  window.location.href = 'carrinho.html';
+  });
+
 
   btnLogout.addEventListener('click', () => {
     localStorage.clear();

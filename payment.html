@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagamento - Fila Free</title>
+  <link rel="stylesheet" href="payment.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <div class="cartao">
+  <div class="cartao-conteudo">
+    <div class="agrupado-direita">
+      <button class="voltar-btn" onclick="window.location.href='carrinho.html'" aria-label="Voltar para o carrinho">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+        </svg>
+        <span>Voltar</span>
+      </button>
+      <h1>Cartão de Débito</h1>
+    </div>
+  </div>
+</div>
+
+  <div class="container">
+    <h1>Pagamento</h1>
+    <p id="amount-display">Carregando valor...</p>
+    <form id="payment-form">
+      <div id="card-element"><!-- Stripe injecta aqui --></div>
+      <button type="submit" id="submit-button">Pagar</button>
+    </form>
+    <p id="status-message"></p>
+  </div>
+
+  <script src="payment.js"></script>
+</body>
+</html>
