@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const userId = 1; // hardcoded igual no backend, futuramente extrair do token
+
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("totalValor");
 
@@ -14,13 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function buscarCarrinho() {
     try {
-      const response = await fetch("http://localhost:8080/api/cart", {
+      // Usar o endpoint que retorna os itens do carrinho para o usuário
+      const response = await fetch(`http://localhost:8080/api/cart/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
 
-      if (!response.ok) throw new Error("Erro ao buscar o carrinho");
+      if (!response.ok) {
+        if (response.status === 204) { // No Content
+          listaCarrinho.innerHTML = '<p>Seu carrinho está vazio.</p>';
+          atualizarTotal(0);
+          return;
+        }
+        throw new Error("Erro ao buscar o carrinho");
+      }
 
       const produtos = await response.json();
       listaCarrinho.innerHTML = '';
@@ -71,16 +81,19 @@ document.addEventListener("DOMContentLoaded", () => {
         listaCarrinho.appendChild(div);
       });
 
-      atualizarTotal(produtos.reduce((acc, p) => acc + p.preco * p.quantidade, 0));
+      // Calcular total
+      const total = produtos.reduce((acc, p) => acc + p.preco * p.quantidade, 0);
+      atualizarTotal(total);
 
     } catch (err) {
       listaCarrinho.innerHTML = `<p>${err.message}</p>`;
+      atualizarTotal(0);
     }
   }
 
-  async function atualizarQuantidade(id, novaQuantidade) {
+  async function atualizarQuantidade(productId, novaQuantidade) {
     try {
-      await fetch(`http://localhost:8080/api/cart/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/cart/${productId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -89,20 +102,24 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ quantidade: novaQuantidade })
       });
 
+      if (!response.ok) throw new Error("Erro ao atualizar quantidade");
+
       await buscarCarrinho();
     } catch (err) {
       alert('Erro ao atualizar quantidade');
     }
   }
 
-  async function removerProduto(id) {
+  async function removerProduto(productId) {
     try {
-      await fetch(`http://localhost:8080/api/cart/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/cart/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
+
+      if (!response.ok) throw new Error("Erro ao remover produto");
 
       await buscarCarrinho();
     } catch (err) {
@@ -137,15 +154,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  finalizarBtn.addEventListener("click", () => {
+  finalizarBtn.addEventListener("click", async () => {
     const selected = document.querySelector(".payment-option.selected");
     if (!selected) {
       alert("Por favor, selecione uma forma de pagamento.");
       return;
     }
 
-    // Aqui você pode integrar com o endpoint de pagamento ou redirecionar
-    window.location.href = "../Pagamento/payment.html";
+    try {
+      // Chamar endpoint de checkout do backend
+      const response = await fetch(`http://localhost:8080/api/cart/checkout?userId=${userId}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        alert(`Erro ao finalizar compra: ${errorText}`);
+        return;
+      }
+
+      const paymentResponse = await response.json();
+      // Aqui você pode redirecionar para a página de sucesso, ou exibir mensagem
+      alert('Compra finalizada com sucesso!');
+      window.location.href = "../Pagamento/payment.html";
+
+    } catch (error) {
+      alert('Erro na finalização da compra.');
+    }
   });
 
   buscarCarrinho();

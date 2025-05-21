@@ -1,3 +1,7 @@
+
+
+/**ESSA CLASSE NAO SE REFERE AO CARRINHO, MAS SIM, AO LISTA-COMPRAS, QUE SERIA A TELA INICIAL DO PROJETO!!!!!!!!! */
+
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -10,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnIrParaLeitura = document.getElementById('btnIrParaLeitura');
   const btnIrParaManual = document.getElementById('btnIrParaManual');
   const btnVerCarrinho = document.getElementById('btnVerCarrinho');
-
+  
   btnVerCarrinho.addEventListener('click', () => {
   window.location.href = 'carrinho.html';
   });

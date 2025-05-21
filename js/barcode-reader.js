@@ -2,9 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultadoSpan = document.getElementById('resultado');
   const statusP = document.getElementById('status');
   const btnVoltar = document.getElementById('btnVoltar');
+  const btnAdicionar = document.getElementById('btnAdicionarCarrinho');
   const token = localStorage.getItem('token');
 
-  // Verifica token (autenticação)
+  let codigoDetectado = null;
+
   if (!token) {
     window.location.href = 'login.html';
     return;
@@ -14,44 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'lista-compras.html';
   });
 
-  // Inicializa o Quagga
-  Quagga.init({
-    inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: document.querySelector("#camera"),
-      constraints: {
-        facingMode: "environment" // tenta usar câmera traseira (ambiente)
-      }
-    },
-    decoder: {
-      readers: ["code_128_reader", "ean_reader", "ean_8_reader"]
-    },
-    locate: true // ajuda no foco para encontrar o código
-  }, function(err) {
-    if (err) {
-      console.error("Erro ao iniciar câmera:", err);
-      statusP.textContent = "Erro ao iniciar câmera: " + err.message || err;
+  btnAdicionar.addEventListener('click', async () => {
+    if (!codigoDetectado) {
+      statusP.textContent = "Nenhum código disponível para adicionar.";
+      statusP.style.color = 'red';
       return;
     }
-    statusP.textContent = "Pronto para ler o código.";
-    Quagga.start();
-  });
 
-  // Evento disparado quando um código é detectado
-  Quagga.onDetected(async (data) => {
-    const codigo = data.codeResult.code;
-    resultadoSpan.textContent = codigo;
-    statusP.textContent = "Código detectado, adicionando ao carrinho...";
+    statusP.textContent = "Adicionando ao carrinho...";
+    statusP.style.color = 'black';
 
     try {
-      const response = await fetch('https://seuservidor.com/api/cart', {
+      const response = await fetch('http://localhost:8080/api/cart', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ codigoProduto: codigo })
+        body: JSON.stringify({ codigoProduto: codigoDetectado })
       });
 
       if (!response.ok) {
@@ -60,9 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       statusP.textContent = "Produto adicionado com sucesso!";
+      statusP.style.color = 'green';
+      btnAdicionar.disabled = true;
+      resultadoSpan.textContent = "Nenhum";
+      codigoDetectado = null;
     } catch (error) {
-      console.error("Erro ao adicionar produto:", error);
+      console.error("Erro:", error);
       statusP.textContent = "Erro: " + error.message;
+      statusP.style.color = 'red';
+    }
+  });
+
+  // Inicializa o Quagga para ler código de barras
+  Quagga.init({
+    inputStream: {
+      name: "Live",
+      type: "LiveStream",
+      target: document.querySelector("#camera"),
+      constraints: {
+        facingMode: "environment"
+      }
+    },
+    decoder: {
+      readers: ["code_128_reader", "ean_reader", "ean_8_reader"]
+    },
+    locate: true
+  }, function(err) {
+    if (err) {
+      console.error("Erro ao iniciar câmera:", err);
+      statusP.textContent = "Erro ao iniciar câmera: " + (err.message || err);
+      statusP.style.color = 'red';
+      return;
+    }
+    statusP.textContent = "Pronto para ler o código.";
+    statusP.style.color = 'black';
+    Quagga.start();
+  });
+
+  Quagga.onDetected((data) => {
+    const codigo = data.codeResult.code;
+
+    if (codigo !== codigoDetectado) {
+      codigoDetectado = codigo;
+      resultadoSpan.textContent = codigo;
+      btnAdicionar.disabled = false;
+      statusP.textContent = "Código detectado. Clique em 'Adicionar ao Carrinho'.";
+      statusP.style.color = 'black';
     }
   });
 });
