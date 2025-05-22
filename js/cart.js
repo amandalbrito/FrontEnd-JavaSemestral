@@ -33,33 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'codigo-manual.html';
   });
 
-  async function buscarLista() {
-    try {
-      const response = await fetch('http://localhost:8080/api/cart', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (!response.ok) throw new Error('Erro ao buscar lista');
-      const lista = await response.json();
-
-      if (lista.length === 0) {
-        listaDiv.innerHTML = '<p>Lista de compras vazia.</p>';
-        return;
-      }
-
-      listaDiv.innerHTML = '';
-      lista.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = `${item.nomeProduto} - Quantidade: ${item.quantidade}`;
-        const btnRemover = document.createElement('button');
-        btnRemover.textContent = 'Remover';
-        btnRemover.addEventListener('click', () => removerItem(item.id));
-        div.appendChild(btnRemover);
-        listaDiv.appendChild(div);
-      });
-    } catch (error) {
-      listaDiv.textContent = error.message;
+async function buscarLista() {
+  try {
+    const response = await fetch('http://localhost:8080/api/cart', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!response.ok) throw new Error('Erro ao buscar lista');
+    const lista = await response.json();
+    if (lista.length === 0) {
+      listaDiv.innerHTML = '<p>Lista de compras vazia.</p>';
+      return;
     }
+    listaDiv.innerHTML = '';
+    lista.forEach(item => {
+      const div = document.createElement('div');
+      div.textContent = `${item.nomeProduto} - Quantidade: ${item.quantidade}`;
+      const btnRemover = document.createElement('button');
+      btnRemover.textContent = 'Remover';
+      btnRemover.addEventListener('click', () => removerItem(item.id));
+      div.appendChild(btnRemover);
+      listaDiv.appendChild(div);
+    });
+  } catch (error) {
+    listaDiv.textContent = error.message;
   }
+}
 
   async function removerItem(id) {
     try {

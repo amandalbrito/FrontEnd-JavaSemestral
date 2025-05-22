@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnVoltar = document.getElementById('btnVoltar');
   const btnAdicionar = document.getElementById('btnAdicionarCarrinho');
   const token = localStorage.getItem('token');
+  const API_CART_ADD_URL = 'http://localhost:8080/api/cart/add';
+  console.log('>>> TOKEN para buscarCarrinho:', token);
+
+
 
   let codigoDetectado = null;
 
@@ -18,37 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnAdicionar.addEventListener('click', async () => {
     if (!codigoDetectado) {
-      statusP.textContent = "Nenhum código disponível para adicionar.";
+      statusP.textContent = 'Nenhum código disponível para adicionar.';
       statusP.style.color = 'red';
       return;
     }
 
-    statusP.textContent = "Adicionando ao carrinho...";
-    statusP.style.color = 'black';
-
     try {
-      const response = await fetch('http://localhost:8080/api/cart', {
+      const response = await fetch(API_CART_ADD_URL, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ codigoProduto: codigoDetectado })
+        body: JSON.stringify({ codigoBarras: codigoDetectado, quantidade: 1 })
       });
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || 'Erro ao adicionar produto');
+        const errText = await response.text();
+        throw new Error(errText || `HTTP ${response.status}`);
       }
 
-      statusP.textContent = "Produto adicionado com sucesso!";
+      const updatedCart = await response.json();
+      console.log('Carrinho atualizado:', updatedCart);
+
+      statusP.textContent = 'Produto adicionado com sucesso!';
       statusP.style.color = 'green';
       btnAdicionar.disabled = true;
-      resultadoSpan.textContent = "Nenhum";
+      resultadoSpan.textContent = 'Nenhum';
       codigoDetectado = null;
     } catch (error) {
-      console.error("Erro:", error);
-      statusP.textContent = "Erro: " + error.message;
+      console.error('Erro ao adicionar produto:', error);
+      statusP.textContent = 'Erro: ' + error.message;
       statusP.style.color = 'red';
     }
   });
@@ -56,37 +60,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializa o Quagga para ler código de barras
   Quagga.init({
     inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: document.querySelector("#camera"),
-      constraints: {
-        facingMode: "environment"
-      }
+      name: 'Live',
+      type: 'LiveStream',
+      target: document.querySelector('#camera'),
+      constraints: { facingMode: 'environment' }
     },
-    decoder: {
-      readers: ["code_128_reader", "ean_reader", "ean_8_reader"]
-    },
+    decoder: { readers: ['code_128_reader', 'ean_reader', 'ean_8_reader'] },
     locate: true
-  }, function(err) {
+  }, (err) => {
     if (err) {
-      console.error("Erro ao iniciar câmera:", err);
-      statusP.textContent = "Erro ao iniciar câmera: " + (err.message || err);
+      console.error('Erro ao iniciar câmera:', err);
+      statusP.textContent = 'Erro ao iniciar câmera: ' + (err.message || err);
       statusP.style.color = 'red';
       return;
     }
-    statusP.textContent = "Pronto para ler o código.";
+    statusP.textContent = 'Pronto para ler o código.';
     statusP.style.color = 'black';
     Quagga.start();
   });
 
   Quagga.onDetected((data) => {
     const codigo = data.codeResult.code;
-
     if (codigo !== codigoDetectado) {
       codigoDetectado = codigo;
       resultadoSpan.textContent = codigo;
       btnAdicionar.disabled = false;
-      statusP.textContent = "Código detectado. Clique em 'Adicionar ao Carrinho'.";
+      statusP.textContent = 'Código detectado. Clique em \'Adicionar ao Carrinho\'.';
       statusP.style.color = 'black';
     }
   });

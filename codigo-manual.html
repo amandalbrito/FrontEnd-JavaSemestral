@@ -7,13 +7,18 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h2>Adicionar Produto Manualmente</h2>
+  <main>
+    <h2>Adicionar Produto Manualmente</h2>
 
-  <input type="text" id="inputCodigoManual" placeholder="Digite o código do produto" />
-  <button id="btnAdicionarManual">Adicionar Produto</button><br><br>
+    <form onsubmit="return false;">
+      <input type="text" id="inputCodigoManual" placeholder="Digite o código do produto" />
+      <button id="btnAdicionarManual" type="button">Adicionar Produto</button>
+    </form>
 
-  <p id="status"></p>
-  <button id="btnVoltar">Voltar para Lista</button>
+    <p id="status"></p>
+
+    <button id="btnVoltar" type="button">Voltar para o Carrinho</button>
+  </main>
 
   <script src="js/manual-code.js" defer></script>
 </body>

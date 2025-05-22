@@ -3,45 +3,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputCodigoManual = document.getElementById('inputCodigoManual');
   const btnAdicionarManual = document.getElementById('btnAdicionarManual');
   const status = document.getElementById('status');
+  const API_CART_ADD_URL = 'http://localhost:8080/api/cart/add';
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
 
   btnVoltar.addEventListener('click', () => {
-    alert('Voltando para tela inicial...');
     window.location.href = 'lista-compras.html';
   });
 
   btnAdicionarManual.addEventListener('click', async () => {
-    const codigo = inputCodigoManual.value.trim();
-    if (!codigo) {
-      status.textContent = 'Digite um código válido.';
+    const codigoBarras = inputCodigoManual.value.trim();
+
+    if (!codigoBarras) {
+      status.textContent = 'Digite um código de barras válido.';
       status.style.color = 'red';
       return;
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      window.location.href = 'login.html';
-      return;
-    }
-
     try {
-      const response = await fetch('http://localhost:8080/api/cart', {
+      const response = await fetch(API_CART_ADD_URL, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ codigoProduto: codigo })
+        body: JSON.stringify({
+          codigoBarras: codigoBarras,
+          quantidade: 1
+        })
       });
 
       if (!response.ok) {
-        const erro = await response.json();
-        throw new Error(erro.message || 'Erro ao adicionar produto');
+        const errorText = await response.text();
+        throw new Error(errorText || `HTTP ${response.status}`);
       }
 
       status.textContent = 'Produto adicionado com sucesso!';
       status.style.color = 'green';
       inputCodigoManual.value = '';
+
+      // Redireciona após 1 segundo
+      setTimeout(() => {
+        window.location.href = 'carrinho.html';
+      }, 1000);
     } catch (err) {
+      console.error('Erro ao adicionar produto:', err);
       status.textContent = err.message;
       status.style.color = 'red';
     }
