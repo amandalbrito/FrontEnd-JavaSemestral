@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const listaCarrinho = document.getElementById('listaCarrinho');
-  const totalSpan = document.getElementById('totalValor');
-  const btnContinuar = document.getElementById('btnContinuar');
-  const btnFinalizar = document.getElementById('btnFinalizar');
+  const totalSpan     = document.getElementById('totalValor');
+  const btnContinuar  = document.getElementById('btnContinuar');
+  const btnFinalizar  = document.getElementById('btnFinalizar');
 
   btnContinuar.addEventListener('click', () => window.location.href = 'lista-compras.html');
   btnFinalizar.addEventListener('click', () => window.location.href = 'checkout.html');
@@ -21,30 +21,43 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
+      // Carrinho vazio no servidor
       if (resp.status === 204) {
         listaCarrinho.innerHTML = '<p>Seu carrinho está vazio.</p>';
         atualizarTotal(0);
+        localStorage.removeItem('cartTotalCents');
+        localStorage.removeItem('cartItems');
         return;
       }
 
       if (!resp.ok) throw new Error(`Erro ${resp.status} ao buscar o carrinho`);
 
-      const cart = await resp.json();
-      const produtos = cart.cartItems || [];
+      const { cartItems: produtos = [] } = await resp.json();
 
+      // Renderiza itens ou mensagem de vazio
       listaCarrinho.innerHTML = produtos.length
         ? produtos.map(renderProduto).join('')
         : '<p>Seu carrinho está vazio.</p>';
-
       produtos.forEach(attachProdutoHandlers);
 
-      const total = produtos.reduce((acc, p) => acc + p.product.preco * p.quantity, 0);
-      atualizarTotal(total);
+      // Calcula total em reais
+      const totalReais = produtos.reduce(
+        (acc, p) => acc + p.product.preco * p.quantity,
+        0
+      );
+      atualizarTotal(totalReais);
+
+      // Salva no localStorage para o checkout
+      const totalCents = Math.round(totalReais * 100);
+      localStorage.setItem('cartTotalCents', totalCents.toString());
+      localStorage.setItem('cartItems', JSON.stringify(produtos));
 
     } catch (err) {
       console.error('Erro ao carregar carrinho:', err);
       listaCarrinho.innerHTML = '<p>Erro ao carregar carrinho</p>';
       atualizarTotal(0);
+      localStorage.removeItem('cartTotalCents');
+      localStorage.removeItem('cartItems');
     }
   }
 
@@ -70,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });
-        if (!resp.ok) throw new Error(`Erro ${resp.status}`);
-        buscarCarrinho();
+        if (!resp.ok) throw new Error(`Erro ${resp.status} ao remover item`);
+        buscarCarrinho();  // Recarrega a lista e atualiza total
       } catch (err) {
         console.error('Erro ao remover item:', err);
         alert('Erro ao remover o item do carrinho.');

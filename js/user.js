@@ -1,3 +1,5 @@
+// main.js (login e cadastro unificados)
+
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
 
@@ -10,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupCadastro() {
   const btnCadastrar = document.getElementById('btnCadastrar');
-  const errorDiv = document.getElementById('error');
+  const errorDiv     = document.getElementById('error');
 
   btnCadastrar.addEventListener('click', async () => {
     errorDiv.textContent = '';
 
-    const nome = document.getElementById('nome').value.trim();
+    const nome  = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
-    const cpf = document.getElementById('cpf').value.trim();
+    const cpf   = document.getElementById('cpf').value.trim();
     const senha = document.getElementById('senha').value.trim();
 
     if (!nome || !email || !cpf || !senha) {
@@ -76,8 +78,10 @@ function setupLogin() {
         throw new Error(data?.message || 'Erro ao fazer login');
       }
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('email', data.email);
+      // Armazena token e identificadores do usuário
+      localStorage.setItem('token',     data.token);
+      localStorage.setItem('userId',    String(data.userId || data.id));
+      localStorage.setItem('userEmail', data.email);
 
       window.location.href = 'lista-compras.html';
 
