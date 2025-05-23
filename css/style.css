@@ -201,6 +201,20 @@ a:hover {
   text-align: center;
 }
 
+
+
+/* Botão de Inserir no Carrinho */
+
+.btnAdicionarManual {
+
+  font-size: medium;
+  align-items: self-end;
+  background-color: #4d6600;
+
+}
+
+
+
 /* Título do Carrinho */
 h1 {
   font-size: 1.4rem;

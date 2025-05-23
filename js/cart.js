@@ -43,14 +43,16 @@ async function buscarLista() {
     if (lista.length === 0) {
       listaDiv.innerHTML = '<p>Lista de compras vazia.</p>';
       return;
-    }
+    }    
+
+
     listaDiv.innerHTML = '';
-    lista.forEach(item => {
+    lista.cartItems.forEach(item => {
       const div = document.createElement('div');
-      div.textContent = `${item.nomeProduto} - Quantidade: ${item.quantidade}`;
+      div.textContent = `${item.product.nome} - Quantidade: ${item.quantity}`;
       const btnRemover = document.createElement('button');
       btnRemover.textContent = 'Remover';
-      btnRemover.addEventListener('click', () => removerItem(item.id));
+      btnRemover.addEventListener('click', () => removerItem(item.product.id));
       div.appendChild(btnRemover);
       listaDiv.appendChild(div);
     });

@@ -4,17 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Leitor de Código de Barras</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/barcode.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
 <body>
-  <h2>Leitor de Código de Barras</h2>
 
-  <div id="camera" style="width: 100%; max-width: 400px; height: 300px;"></div>
-  <p>Código detectado: <span id="resultado">Nenhum</span></p>
-  <button id="btnAdicionarCarrinho" disabled>Adicionar ao Carrinho</button>
+  <div class="codebar">
+    <h2>Leitor de Código de Barras</h2>
+  </div>
+
+  
+  <div class="camera" id="camera" ></div>
   <p id="status"></p>
-  <button id="btnVoltar">Voltar para Lista</button>
+  
+
+  <div class="produto">
+    <p>Código detectado: <span id="resultado">Nenhum</span></p>
+    <div class="detectado">
+      <button id="btnVoltar">Voltar para Lista</button>
+      <button id="btnAdicionarCarrinho" disabled>Adicionar ao Carrinho</button>
+    </div>
+  </div>
+
+  <div id="overlayProduto" class="overlay hidden">
+    <div class="card-produto">
+      <img id="imgProduto" src="" alt="Imagem do produto" />
+      <h3 id="nomeProduto"></h3>
+      <p id="precoProduto"></p>
+      <button onclick="ocultarProdutoModal()">Fechar</button>
+    </div>
+  </div>
 
   <script src="js/barcode-reader.js" defer></script>
 </body>

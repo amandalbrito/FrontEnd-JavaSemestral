@@ -77,6 +77,7 @@ function setupLogin() {
       if (!response.ok) {
         throw new Error(data?.message || 'Erro ao fazer login');
       }
+      
 
       // Armazena token e identificadores do usuário
       localStorage.setItem('token',     data.token);
