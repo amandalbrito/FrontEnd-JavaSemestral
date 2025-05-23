@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
       status.style.color = 'green';
       inputCodigoManual.value = '';
 
-      // Redireciona após 1 segundo
       setTimeout(() => {
         window.location.href = 'carrinho.html';
       }, 1000);

@@ -17,7 +17,7 @@ body {
 }
 
 .cartao {
-  background-color: #0a6efd;
+  background: linear-gradient(to right, #43a047, #66bb6a,#aacaac);;
   color: white;
   padding: 10px 12px;
   width: 100%;
@@ -42,7 +42,10 @@ body {
 .cartao h1 {
   font-size: 18px;
   color: white;
-  
+  display: flex;
+  white-space: nowrap;
+  margin-left: 20px;
+  margin-top: 8px;
 }
 
 
@@ -55,6 +58,8 @@ body {
   font-size: 16px;
   cursor: pointer;
   width: 100%;
+  margin-bottom: 2px;
+
 }
 
 .voltar-btn svg {
@@ -65,7 +70,7 @@ body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.918);
   width: 90%;
   max-width: 400px;
   margin-top: 100px;
@@ -90,7 +95,7 @@ h1 {
 }
 
 #submit-button {
-  background-color: #0a6efd;
+  background-color: #43a047;
   color: white;
   border: none;
   padding: 12px;
@@ -101,9 +106,6 @@ h1 {
   transition: background-color 0.2s ease;
 }
 
-#submit-button:hover {
-  background-color: #084ec1;
-}
 
 #status-message {
   margin-top: 16px;
@@ -115,3 +117,36 @@ input, button, select, textarea {
   font-size: 16px;
 }
 
+.metodo-pagamento {
+  display: flex;
+  justify-content: center;
+  gap: 24px; 
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.metodo-btn {
+  flex: 1 1 45%;
+  background: white;
+  color: gray;
+  border: none;
+  padding: 14px 0;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  min-width: 140px;
+  max-width: 100%;
+}
+
+.metodo-btn:hover {
+  background: linear-gradient(to right, #43a047, #66bb6a, #aacaac);
+  transform: scale(1.05);
+}
+
+.metodo-btn.selected {
+  background: #43a047;
+  color: white;
+  transform: scale(1.10);
+}

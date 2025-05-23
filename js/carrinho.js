@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
-      // Carrinho vazio no servidor
       if (resp.status === 204) {
         listaCarrinho.innerHTML = '<p>Seu carrinho está vazio.</p>';
         atualizarTotal(0);
@@ -34,20 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const { cartItems: produtos = [] } = await resp.json();
 
-      // Renderiza itens ou mensagem de vazio
       listaCarrinho.innerHTML = produtos.length
         ? produtos.map(renderProduto).join('')
         : '<p>Seu carrinho está vazio.</p>';
       produtos.forEach(attachProdutoHandlers);
 
-      // Calcula total em reais
       const totalReais = produtos.reduce(
         (acc, p) => acc + p.product.preco * p.quantity,
         0
       );
       atualizarTotal(totalReais);
 
-      // Salva no localStorage para o checkout
       const totalCents = Math.round(totalReais * 100);
       localStorage.setItem('cartTotalCents', totalCents.toString());
       localStorage.setItem('cartItems', JSON.stringify(produtos));
@@ -95,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function atualizarTotal(total) {
     totalSpan.textContent = `R$ ${total.toFixed(2)}`;
   }
+
+
+  
 
   buscarCarrinho();
 });

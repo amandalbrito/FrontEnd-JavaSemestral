@@ -4,26 +4,30 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Recuperar Senha</title>
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/recuperar-senha.css" />
 </head>
 <body>
-  <h2>Recuperar Senha</h2>
-  <div id="error" class="error"></div>
-  <div id="success" class="success"></div>
+<form>
+    <h2>Recuperar Senha</h2>
+    <div id="error" class="error"></div>
+    <div id="sucess" class="sucess"></div>
 
-  <label for="email">Email:</label><br />
-  <input type="email" id="email" /><br /><br />
+    <label for="email">Email:</label>
+    <input type="email" id="email" />
 
-  <label for="verificationCode">Código de Verificação:</label><br />
-  <input type="text" id="verificationCode" /><br /><br />
+    <label for="verificationCode">Código de Verificação:</label>
+    <input type="text" id="verificationCode">
 
-  <label for="newPassword">Nova Senha:</label><br />
-  <input type="password" id="newPassword" /><br /><br />
+    <label for="newPassword">Nova Senha:</label>
+    <input type="password" id="newPassword" />
 
-  <button id="btnResetPassword">Alterar Senha</button><br /><br />
+    <button id="btnResetPassword" type="button">Alterar Senha</button>
 
-  <a href="login.html">Voltar ao login</a>
+    <a href="login.html">Voltar ao Login</a> </a>
+    
+    <script src="js/password-recovery.js" defer></script>
 
-  <script src="js/password-recovery.js" defer></script>
+</script>
+  </form>
 </body>
 </html>

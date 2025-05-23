@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.codebar {
+    background: linear-gradient(to right, #43a047, #66bb6a,#aacaac); 
+     width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.codebar h2 {
+  color: white;
+  font-size: 18px;
+}
+
+
+.camera {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4 / 3; 
+  margin-top: 80px;
+  background-color: #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 4px 4px 12px 4px rgba(0, 0, 0, 0.753);
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.camera video,
+.camera canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+
+.produto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  padding: 25px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 10px;
+}
+
+
+.produto p {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+
+
+.detectado {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+.detectado button {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #43a047;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.detectado button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.detectado button:hover:not(:disabled) {
+  background-color: #43a047;
+}
+
+
+#status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+
+/*Produto sobreposto*/
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.card-produto {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px #00000050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-produto img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.card-produto h3 {
+  font-size: 18px;
+  margin: 10px 0 5px;
+}
+
+.card-produto p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.card-produto button {
+  background-color: #66bb6a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.card-produto button:hover {
+  background-color: #43a047;
+}
+

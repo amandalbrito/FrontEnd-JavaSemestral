@@ -79,7 +79,6 @@ function setupLogin() {
       }
       
 
-      // Armazena token e identificadores do usuário
       localStorage.setItem('token',     data.token);
       localStorage.setItem('userId',    String(data.userId || data.id));
       localStorage.setItem('userEmail', data.email);

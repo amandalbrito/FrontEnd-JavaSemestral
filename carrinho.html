@@ -4,27 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carrinho de Compras</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/carrinho.css" />
 </head>
 <body>
-  <main>
-    <h1>Carrinho de Compras</h1>
 
-    <section id="listaCarrinho" class="lista-carrinho"></section>
+  <div class="cartao">
+  <div class="cartao-conteudo">
+    <button class="voltar-btn" onclick="window.history.back();">← Voltar</button>
+  </div>
+</div>
 
-    <div class="valor-total">
-      <div class="total">
-        <strong>TOTAL:</strong>
-        <span id="totalValor">R$ 0,00</span>
-      </div>
+<main class="container">
+  <h1>Carrinho de compras</h1>
+
+  <section id="listaCarrinho" class="lista-carrinho">
+    <div class="item">
+      <span>Item</span>
+      <button class="remover">Remover</button>
     </div>
-
-    <div class="botoes-carrinho">
-      <button id="btnContinuar" type="button">Continuar Comprando</button>
-      <button id="btnFinalizar" type="button">Finalizar Compra</button>
+    <div class="item">
+      <span>Item</span>
+      <button class="remover">Remover</button>
     </div>
-  </main>
+  </section>
+
+  <div class="valor-total">
+    <div class="total">
+      <strong>TOTAL:</strong>
+      <span id="totalValor">61.50</span>
+    </div>
+  </div>
+
+  <div class="botoes-carrinho">
+    <button id="btnContinuar" type="button">🛒 Continuar comprando</button>
+    <button id="btnFinalizar" type="button">Finalizar compra</button>
+  </div>
+</main>
 
   <script src="js/carrinho.js" defer></script>
 </body>
-</html>
+</html> 
