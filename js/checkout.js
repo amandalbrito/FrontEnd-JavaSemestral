@@ -1,3 +1,5 @@
+import API_URL from "apiConfig.js";
+
 /* Simulação de pagamento!! */
 
 const token = localStorage.getItem("token");
