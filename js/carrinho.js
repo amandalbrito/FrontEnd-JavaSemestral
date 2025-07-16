@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/api';
+import API_URL from './apiConfig.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!resp.ok) throw new Error(`Erro ${resp.status} ao remover item`);
-        buscarCarrinho();  // Recarrega a lista e atualiza total
+        buscarCarrinho();
       } catch (err) {
         console.error('Erro ao remover item:', err);
         alert('Erro ao remover o item do carrinho.');
@@ -91,9 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function atualizarTotal(total) {
     totalSpan.textContent = `R$ ${total.toFixed(2)}`;
   }
-
-
-  
 
   buscarCarrinho();
 });
