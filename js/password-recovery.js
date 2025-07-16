@@ -1,3 +1,6 @@
+// reset-password.js
+import API_URL from './apiConfig.js';
+
 document.getElementById('btnResetPassword').addEventListener('click', async () => {
   const email = document.getElementById('email').value;
   const verificationCode = document.getElementById('verificationCode').value;
@@ -14,10 +17,10 @@ document.getElementById('btnResetPassword').addEventListener('click', async () =
   }
 
   try {
-    const response = await fetch('/api/auth/reset-password', {
+    const response = await fetch(`${API_URL}/auth/reset-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, verificationCode, newPassword }),
+      body: JSON.stringify({ email, verificationCode, newPassword })
     });
 
     if (response.ok) {
