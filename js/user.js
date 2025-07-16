@@ -1,4 +1,5 @@
 // main.js (login e cadastro unificados)
+import API_URL from './apiConfig.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
@@ -28,7 +29,7 @@ function setupCadastro() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/users/cadastrarUser', {
+      const response = await fetch(`${API_URL}/users/cadastrarUser`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, cpf, senha })
@@ -65,7 +66,7 @@ function setupLogin() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
@@ -77,7 +78,6 @@ function setupLogin() {
       if (!response.ok) {
         throw new Error(data?.message || 'Erro ao fazer login');
       }
-      
 
       localStorage.setItem('token',     data.token);
       localStorage.setItem('userId',    String(data.userId || data.id));
