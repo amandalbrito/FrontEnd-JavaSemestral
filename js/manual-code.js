@@ -1,3 +1,5 @@
+import API_URL from "apiConfig.js";
+
 document.addEventListener('DOMContentLoaded', () => {
   const btnVoltar = document.getElementById('btnVoltar');
   const inputCodigoManual = document.getElementById('inputCodigoManual');
