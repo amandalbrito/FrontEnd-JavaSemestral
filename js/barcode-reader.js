@@ -1,3 +1,5 @@
+import API_URL from "apiConfig.js";
+
 const { Quagga } = require("quagga");
 
 document.addEventListener('DOMContentLoaded', () => {
