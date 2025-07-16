@@ -4,20 +4,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fila Free</title>
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lista-compras.css" />
 </head>
 <body>
-  <h2>Fila Free</h2>
-  <button id="btnLogout">Sair</button><br /><br />
+  <div class="header">
+    <h2>Bem vindo(a) ao Fila Free!</h2>
+    <button id="btnLogout">Sair</button><br /><br />
+  </div>
 
-  <button id="btnIrParaLeitura">Adicionar via Leitura de Código</button><br /><br />
-  <button id="btnIrParaManual">Adicionar Manualmente</button><br /><br />
-  <button id="btnVerCarrinho">Ver Carrinho 🛒</button><br /><br />
+  <div class="codebar">
+    <button class="btnCodebar" id="btnIrParaLeitura">Adicionar Produto via Leitura de Código</button><br /><br />
+    <button class="btnCodebar" id="btnIrParaManual">Adicionar Código do Produto Manualmente</button><br /><br />
+  </div>
+  
+  <button id="btnVerCarrinho">Ver Carrinho Completo</button><br /><br />
 
 
-  <div id="listaProdutos"></div>
+
+
 
   <script src="js/cart.js" defer></script>
-
 </body>
 </html>

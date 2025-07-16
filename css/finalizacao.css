@@ -1,0 +1,90 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Layout restrito para mobile e centralizado */
+body {
+  background-color: #f0f0f0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centraliza verticalmente */
+  align-items: center;     /* centraliza horizontalmente */
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  margin: 20px 0;
+  font-size: 25px;
+}
+
+/* Círculo com check */
+.circle-check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border: 5px solid black;
+  border-radius: 50%;
+  background-color: #6b942c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.check {
+  color: white;
+  font-size: 2.5rem;
+}
+
+/* Resumo da compra */
+#resumoCompra {
+  background-color: #c3d9a5;
+  margin: 20px 0;
+  padding: 15px 15px 40px 15px;
+  min-height: 100px;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total {
+  margin-top: 20px;    
+  background-color: #d3d3d3;
+  padding: 10px 20px;
+  width: 59%;
+  box-sizing: border-box;
+  height: 30px;
+  position: static;     
+}
+
+
+/* Título da seção */
+h2 {
+  margin-bottom: 20px;
+}
+
+/* Pagamento */
+#pagamento {
+  border: 1px solid rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  text-align: center;
+  width: fit-content;
+  margin: 20px 0;
+}

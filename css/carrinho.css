@@ -7,7 +7,7 @@
 
 .cartao {
   background: linear-gradient(to right, #43a047, #66bb6a, #aacaac);
-  color: white;
+  color: #f0f0f0;
   padding: 10px 12px;
   width: 100%;
   position: fixed;

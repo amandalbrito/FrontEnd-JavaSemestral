@@ -1,3 +1,5 @@
+const { Quagga } = require("quagga");
+
 document.addEventListener('DOMContentLoaded', () => {
   const resultadoSpan = document.getElementById('resultado');
   const statusP = document.getElementById('status');
@@ -81,6 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
     statusP.textContent = 'Aguardando código de barras...';
     statusP.style.color = 'black';
   });
+
+  Quagga.Quagga();
+    statusPl
 
   Quagga.onDetected(data => {
     const code = data.codeResult.code;

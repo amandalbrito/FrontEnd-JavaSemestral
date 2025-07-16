@@ -2,26 +2,35 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Finalização da Compra</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Fila Free</title>
+  <link rel="stylesheet" href="css/finalizacao.css" />
 </head>
 <body>
-  <h1>Finalização da Compra</h1>
+  <h1>Compra Finalizada com Sucesso!</h1>
+
+  <div class="circle-check">
+    <div class="circle">
+      <span class="check">&#10003;</span>
+    </div>
+  </div>
 
   <div id="resumoCompra">
-    <h2>Resumo dos Itens</h2>
-    <ul>
-      <li>1x Amend Óleos Indianos - R$30,50</li>
+    <h2>Resumo dos Itens:</h2>
+    <ul id="listaItens">
+      <li>1x Amend Óleos Indianos - R$ 30,50</li>
       <li>1x Arroz - R$ 15,50</li>
     </ul>
-    <p><strong>Total:</strong> R$ 46,00</p>
+    <p class="total">
+      <strong>Total:</strong> R$ 46,00
+    </p>
   </div>
 
   <div id="pagamento">
     <h2>Obrigada!</h2>
-    
     <p><strong>Obrigada por usar o FilaFree!</strong></p>
     <p>Este é um protótipo desenvolvido para fins acadêmicos. Nenhuma transação real foi realizada.</p>
   </div>
+
+  <script src="js/payment.js"></script>
 </body>
 </html>

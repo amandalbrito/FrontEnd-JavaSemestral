@@ -1,0 +1,110 @@
+/* === RESET E BOX MODEL === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to right, #43a047, #66bb6a, #aacaac);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.header h2 {
+  color: #fff;
+  font-size: 1.25rem; /* ~20px */
+  font-weight: 600;
+}
+
+#btnLogout {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+}
+
+
+.codebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 4rem auto 0;  
+}
+
+#btnVerCarrinho {
+  margin: 3rem auto 0;
+  display: block;
+}
+
+
+.btnCodebar,
+#btnVerCarrinho {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px 0;
+  background-color: #d3d3d3;
+  color: gray;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btnCodebar:hover,
+#btnVerCarrinho:hover {
+  background-color: #66bb6a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.codebar br,
+#btnVerCarrinho + br {
+  display: none;
+}
+
+.finalizar {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 15px;
+  background: linear-gradient(to right, #43a047, #66bb6a, #aacaac);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+#listaProdutos {
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 500px;
+}
