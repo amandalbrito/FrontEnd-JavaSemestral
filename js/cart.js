@@ -1,4 +1,4 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 /**ESSA CLASSE NAO SE REFERE AO CARRINHO, MAS SIM, AO LISTA-COMPRAS, QUE SERIA A TELA INICIAL DO PROJETO!!!!!!!!! */
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function buscarLista() {
   try {
-    const response = await fetch('http://localhost:8080/api/cart', {
+    const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/cart', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!response.ok) throw new Error('Erro ao buscar lista');
@@ -63,7 +63,7 @@ async function buscarLista() {
 
   async function removerItem(id) {
     try {
-      const response = await fetch(`http://localhost:8080/api/cart/${id}`, {
+      const response = await fetch(`https://backend-javasemestral-production.up.railway.app/api/cart/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

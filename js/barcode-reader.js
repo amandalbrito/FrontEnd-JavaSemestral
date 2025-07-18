@@ -1,4 +1,4 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 const { Quagga } = require("quagga");
 
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusP = document.getElementById('status');
   const btnVoltar = document.getElementById('btnVoltar');
   const btnAdicionar = document.getElementById('btnAdicionarCarrinho');
-  const API_CART_ADD_URL = 'http://localhost:8080/api/cart/add';
+  const API_CART_ADD_URL = 'https://backend-javasemestral-production.up.railway.app/api/cart/add';
 
   const token = localStorage.getItem('token');
   if (!token) {

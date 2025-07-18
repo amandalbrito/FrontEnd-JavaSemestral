@@ -1,4 +1,4 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');

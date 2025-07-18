@@ -1,11 +1,11 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 document.addEventListener('DOMContentLoaded', () => {
   const btnVoltar = document.getElementById('btnVoltar');
   const inputCodigoManual = document.getElementById('inputCodigoManual');
   const btnAdicionarManual = document.getElementById('btnAdicionarManual');
   const status = document.getElementById('status');
-  const API_CART_ADD_URL = 'http://localhost:8080/api/cart/add';
+  const API_CART_ADD_URL = 'https://backend-javasemestral-production.up.railway.app/api/cart/add';
 
   const token = localStorage.getItem('token');
   if (!token) {

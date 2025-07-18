@@ -1,4 +1,4 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 // main.js (login e cadastro unificados)
 
@@ -30,7 +30,7 @@ function setupCadastro() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/users/cadastrarUser', {
+      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/users/cadastrarUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, cpf, senha })
@@ -67,7 +67,7 @@ function setupLogin() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })

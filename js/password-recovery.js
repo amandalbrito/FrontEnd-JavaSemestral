@@ -1,4 +1,4 @@
-import API_URL from "apiConfig.js";
+import API_URL from "./apiConfig";
 
 document.getElementById('btnResetPassword').addEventListener('click', async () => {
   const email = document.getElementById('email').value;
