@@ -1,4 +1,4 @@
-import API_URL from "./apiConfig";
+import API_BASE_URL from "./apiConfig";
 
 document.addEventListener('DOMContentLoaded', () => {
   const btnVoltar = document.getElementById('btnVoltar');

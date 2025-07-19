@@ -1,4 +1,4 @@
-import API_URL from "./apiConfig";
+import API_BASE_URL from "./apiConfig";
 
 const { Quagga } = require("quagga");
 
