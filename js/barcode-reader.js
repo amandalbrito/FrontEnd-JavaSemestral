@@ -1,6 +1,5 @@
 import API_BASE_URL from "./apiConfig.js";
-
-const { Quagga } = require("quagga");
+import { Quagga } from "./quagga.min.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const resultadoSpan = document.getElementById('resultado');
