@@ -1,4 +1,4 @@
-import API_BASE_URL from "./apiConfig";
+import API_BASE_URL from "./apiConfig.js";
 
 document.getElementById('btnResetPassword').addEventListener('click', async () => {
   const email = document.getElementById('email').value;

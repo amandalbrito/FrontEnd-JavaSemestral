@@ -1,4 +1,4 @@
-import API_BASE_URL from "./apiConfig";
+import API_BASE_URL from "./apiConfig.js";
 
 /**ESSA CLASSE NAO SE REFERE AO CARRINHO, MAS SIM, AO LISTA-COMPRAS, QUE SERIA A TELA INICIAL DO PROJETO!!!!!!!!! */
 
