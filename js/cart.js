@@ -63,7 +63,7 @@ async function buscarLista() {
 
   async function removerItem(id) {
     try {
-      const response = await fetch(`https://backend-javasemestral.onrender.com/api/cart/${id}`, {
+      const response = await fetch(`https://fila-free.vercel.app/api/cart/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
