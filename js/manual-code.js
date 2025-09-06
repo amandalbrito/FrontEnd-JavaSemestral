@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputCodigoManual = document.getElementById('inputCodigoManual');
   const btnAdicionarManual = document.getElementById('btnAdicionarManual');
   const status = document.getElementById('status');
-  const API_CART_ADD_URL = 'https://backend-javasemestral-production.up.railway.app/api/cart/add';
+  const API_CART_ADD_URL = 'https://backend-javasemestral.onrender.com/api/cart/add';
 
   const token = localStorage.getItem('token');
   if (!token) {
