@@ -1,5 +1,3 @@
-import API_BASE_URL from "./apiConfig.js";
-
 // main.js (login e cadastro unificados)
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +28,7 @@ function setupCadastro() {
     }
 
     try {
-      const response = await fetch(API_BASE_URL + '/users/cadastrarUser', {
+      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/users/cadastrarUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, cpf, senha })
@@ -67,7 +65,7 @@ function setupLogin() {
     }
 
     try {
-      const response = await fetch(API_BASE_URL + '/login', {
+      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
