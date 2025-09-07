@@ -28,7 +28,7 @@ function setupCadastro() {
     }
 
     try {
-      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/users/cadastrarUser', {
+      const response = await fetch('https://backend-javasemestral.onrender.com/api/users/cadastrarUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, cpf, senha })
@@ -65,7 +65,7 @@ function setupLogin() {
     }
 
     try {
-      const response = await fetch('https://backend-javasemestral-production.up.railway.app/api/login', {
+      const response = await fetch('https://backend-javasemestral.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
