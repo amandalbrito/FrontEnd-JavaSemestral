@@ -29,7 +29,7 @@ function setupCadastro() {
 
     try {
       const response = await fetch('https://backend-javasemestral.onrender.com/api/users/cadastrarUser', {
-        method: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, cpf, senha })
       });
@@ -66,7 +66,7 @@ function setupLogin() {
 
     try {
       const response = await fetch('https://backend-javasemestral.onrender.com/api/login', {
-        method: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
       });
