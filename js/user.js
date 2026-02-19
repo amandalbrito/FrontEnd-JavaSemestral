@@ -1,5 +1,3 @@
-// main.js (login e cadastro unificados)
-
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
 
