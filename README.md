@@ -25,4 +25,5 @@ Frontend da aplicação **Fila Free**, que permite ao usuário escanear ou inser
 ```bash
 # Rodar em servidor local ou abrir no navegador
 ```
+```
 <img width="265" height="482" alt="FilaFree-Front" src="https://github.com/user-attachments/assets/e342b37a-4370-4938-90bb-6cae461d0023" />
