@@ -7,7 +7,7 @@
 # 🛒 Fila Free - Frontend
 
 ## 📌 Sobre
-Frontend da aplicação **Fila Free**, responsável pela interface do usuário e interação com o sistema de filas.
+Frontend da aplicação **Fila Free**, que permite ao usuário escanear ou inserir o código de barras de produtos, adicioná-los ao carrinho e realizar o pagamento diretamente pelo site.
 
 ## 🚀 Tecnologias
 - HTML  
@@ -15,14 +15,14 @@ Frontend da aplicação **Fila Free**, responsável pela interface do usuário e
 - JavaScript  
 
 ## 🎯 Funcionalidades
-- Interface para visualização de filas  
-- Interação com o usuário  
-- Consumo do backend  
-- Navegação e experiência do usuário  
+- Leitura ou inserção manual de código de barras  
+- Exibição de produtos  
+- Adição de itens ao carrinho  
+- Interface para fluxo de compra  
+- Integração com backend para processamento de pedidos  
 
 ## ▶️ Como executar
 ```bash
-# Abrir os arquivos no navegador
-# ou utilizar um servidor local
+# Rodar em servidor local ou abrir no navegador
 ```
 <img width="265" height="482" alt="FilaFree-Front" src="https://github.com/user-attachments/assets/e342b37a-4370-4938-90bb-6cae461d0023" />
